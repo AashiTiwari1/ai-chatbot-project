@@ -1,8 +1,0 @@
-[
-  { "id": 1, "user_input": "hi there", "expected_topic": "greeting" },
-  { "id": 2, "user_input": "what can you do?", "expected_topic": "capabilities" },
-  { "id": 3, "user_input": "tell me a joke", "expected_topic": "fun" },
-  { "id": 4, "user_input": "help me with my project please", "expected_topic": "assistance" },
-  { "id": 5, "user_input": "bye", "expected_topic": "farewell" },
-  { "id": 6, "user_input": "what is your name?", "expected_topic": "identity" }
-]
