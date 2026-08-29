@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './ChatApp.css';
 
-const BACKEND_URL = 'http://localhost:5000/chat';
+const BACKEND_URL = 'https://ai-chatbot-project-aye5.onrender.com/chat';
 
 export default function ChatApp() {
   const [messages, setMessages] = useState([
