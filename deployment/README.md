@@ -3,13 +3,13 @@
 This folder documents how the AI chatbot is deployed and made publicly accessible.
 
 ## Live Links
-- **Frontend (Vercel):** [add your Vercel URL here once live]
+- **Frontend (GitHub Pages):** https://aashitiwari1.github.io/ai-chatbot-project/
 - **Backend (Render):** https://ai-chatbot-project-aye5.onrender.com
 
 ## Deployment Architecture
 User's Browser
 ↓
-Frontend hosted on Vercel (React/Vite)
+Frontend hosted on GitHub Pages (React/Vite static build)
 ↓
 Backend hosted on Render (Node.js/Express)
 ↓
@@ -22,11 +22,12 @@ Google Gemini API (NLP + response generation)
 4. **Start Command:** `node server.js`
 5. Environment variable `GEMINI_API_KEY` set securely in Render's dashboard (not committed to the repo)
 
-## Frontend Deployment (Vercel)
-1. Repository connected to Vercel
-2. **Root Directory:** `src/chatbot-frontend`
-3. Framework preset: Vite (auto-detected)
-4. `BACKEND_URL` in `ChatApp.jsx` updated to point to the deployed Render backend URL before deploying
+## Frontend Deployment (GitHub Pages)
+1. `vite.config.js` configured with `base: '/ai-chatbot-project/'` to match the GitHub Pages subpath
+2. `package.json` updated with a `homepage` field and `gh-pages` deploy script
+3. Project built locally using `npm run build`, producing a `dist/` folder
+4. Contents of `dist/` (`index.html` and `assets/`) published to the `gh-pages` branch
+5. GitHub Pages configured (Settings → Pages) to serve from the `gh-pages` branch, root folder
 
 ## Environment Variables Required
 | Variable | Where | Purpose |
@@ -34,6 +35,6 @@ Google Gemini API (NLP + response generation)
 | `GEMINI_API_KEY` | Render (backend) | Authenticates requests to the Google Gemini API |
 | `PORT` | Render (backend) | Port the Express server runs on (Render sets this automatically) |
 
-## Notes
-- `.env` files are excluded from the repository via `.gitignore` for security — secrets are configured directly in each hosting platform's dashboard.
-- The backend free tier on Render may spin down after inactivity; the first request after idle time can take up to ~30 seconds to respond.
+## Known Limitations
+- The backend runs on Render's free tier, which spins down after ~15 minutes of inactivity. The first request after idle time can take 20-50 seconds to respond ("cold start") while the server wakes up. Subsequent requests respond normally.
+- `.env` files are excluded from the repository via `.gitignore` — secrets are configured directly in Render's dashboard, not committed to source control.
